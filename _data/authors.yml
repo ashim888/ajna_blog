@@ -1,0 +1,17 @@
+ashim888:
+  name        : "Ashim Lamichhane"
+  bio         : "What do you want, jewels? I am a very extravagant man."
+  avatar      : "/assets/images/image1.JPG"
+  links:
+    - label: "Email"
+      icon: "fas fa-fw fa-envelope-square"
+      url: "mailto:billyrick@rick.com"
+    - label: "Website"
+      icon: "fas fa-fw fa-link"
+      url: "https://thewhip.com"
+    - label: "Twitter"
+      icon: "fab fa-fw fa-twitter-square"
+      url: "https://twitter.com/extravagantman"
+    - label: "Facebook"
+      icon: "fab fa-fw fa-facebook-square"
+      url: "https://twitter.com/extravagantman"
