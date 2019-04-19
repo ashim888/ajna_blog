@@ -1,10 +1,10 @@
 # main links
 main:
   - title: "Categories"
-    url: /Categories/
+    url: /categories/
   - title: "About"
     url: /about/
-  - title: "Contact"
+  - title: "contact"
     url: /contact/
   # - title: "Sitemap"
   #   url: /sitemap/
