@@ -6,7 +6,9 @@ toc: true
 toc_label: Table of Contents"
 header:
     overlay_image: /assets/images/codecode.jpg
-image: /assets/images/euclidean_score.JPG
+image1: /assets/images/euclidean_score.JPG
+image2: /assets/images/tableML.JPG
+
 ---
 
 
@@ -35,7 +37,7 @@ combined actions by group of similar user
 ## Euclidean Distance Score
 
 Euclidean Distance is a simple way to calculate similarity score, which takes items that users have rated in common and uses them as axes for a chart. As show in Figure 1.
-![Eculidean Distance Score]({{page.image | relative_url }})
+![Eculidean Distance Score]({{page.image1 | relative_url }})
 <center><i><small>Figure 1. Users in preference space </small></i></center>
 This figure shows the people charted in preference space. User1 has been plotted at
 4.5 on the Kung Fu Panda axis and at 1.0 on the Frozen axis. The closer two people are in
@@ -78,7 +80,7 @@ recommend to then calcuate the similairy between ‘user1’ and all other users
 rating that user has not rated before. In this case we will be multiplying other product which
 ‘user1’ has never rated before. It looks something like this in the figure below
 
-![Recommendation Table](/assets/images/tableML.JPG)
+![Recommendation Table]({{page.image2 | relative_url }})
 <center><i><small>Table 1: Creating recommendation for User1</small></i></center>
 
 After multiplying similarity with each movie we calculate total of product of similarity and
