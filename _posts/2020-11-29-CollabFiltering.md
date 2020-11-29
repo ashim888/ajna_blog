@@ -34,7 +34,7 @@ combined actions by group of similar user
 ## Euclidean Distance Score
 
 Euclidean Distance is a simple way to calculate similarity score, which takes items that users have rated in common and uses them as axes for a chart. As show in Figure 1.
-![Eculidean Distance Score]({{ relative }}/assets/images/euclidean_score.JPG)
+![Eculidean Distance Score](https://ashim888.github.io/assets/images/euclidean_score.JPG)
 <center><i><small>Figure 1. Users in preference space </small></i></center>
 This figure shows the people charted in preference space. User1 has been plotted at
 4.5 on the Kung Fu Panda axis and at 1.0 on the Frozen axis. The closer two people are in
