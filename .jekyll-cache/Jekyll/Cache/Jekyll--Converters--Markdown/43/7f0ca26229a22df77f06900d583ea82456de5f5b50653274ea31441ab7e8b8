@@ -1,0 +1,143 @@
+I"�A<h1 id="what-is-collaborative-filtering">What is Collaborative Filtering?</h1>
+
+<p>By the name “collab” it means we are combining. In this case we combine multiple user
+information and filter out the items that from the group of user that has similar tastes to the
+user. In general it’s a technique for filtering an item, which a user might like on the basis of
+combined actions by group of similar user</p>
+
+<h1 id="algorithmn-and-concepts">Algorithmn and Concepts</h1>
+
+<h2 id="euclidean-distance-score">Euclidean Distance Score</h2>
+
+<p>Let’s say a person who has identical taste with other people is 1 and 0 for those who has no
+similar taste with other people, so our similarity value ranges from 0 to 1. Since we are
+combining people to find similarity among them and recommend a product depending on
+how similar they are. In order to measure similarity, I will be using Euclidean Distance Score
+in this article. There are many other measures depending on the problem you can chose
+other distance score measures. For this article I will be using movie lens dataset where you
+can find movie,user,rating.</p>
+<ul>
+  <li>Step 1: Load the dataset</li>
+  <li>Step 2: Calculate the similarity score between each user. If ‘user1’ is the one we are trying to
+recommend to then calcuate the similairy between ‘user1’ and all other users.</li>
+</ul>
+<center>d=√((x2-x1)²+(y2-y1)²)</center>
+<center>similarity score (r) = 1/(1+d)</center>
+
+<ul>
+  <li>Step 3: for every other user multiple each similarity we calculate in step 2 with the product
+rating that user has not rated before. In this case we will be multiplying other product which
+‘user1’ has never rated before. It looks something like this in the figure below</li>
+</ul>
+
+<p><img src="/assets/images/tableML.JPG" alt="Recommendation Table" /></p>
+<center><i><small>Table 1: Creating recommendation for User1</small></i></center>
+
+<p>After multiplying similarity with each movie we calculate total of product of similarity and
+movie for each movie. Similarly we calculate sum of similarity of user who has rated movie. If
+you see blank in movie then its corresponding similarity value is not taken into consideration
+while calculating sum. <em><small>Eg: In movie2 for user3 you can see blank so our similarity score for
+movie2 is 0.99+0.38+0.92+0.66 = 2.95.</small></em> After calculating similarity we divide total/sim.sum
+and that value is the predicted score.</p>
+
+<h1 id="pre-requisites">Pre-requisites</h1>
+
+<p>These are the following things you must do before getting started with implementation:</p>
+<ul>
+  <li>Make sure you have python installed in your system</li>
+  <li>You must have basic knowledge of python programming</li>
+</ul>
+
+<h1 id="implementation-of-the-algorithm">Implementation of the Algorithm</h1>
+
+<p>So far so good we have finished algorithm. Now Let’s make your had dirty using python.
+Create a file called <em><small>recommendation.py</small></em>. Inside this file we are going to add all code that will be mentioned here.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">loadMovieLens</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s">'/data/movielens'</span><span class="p">):</span>
+    <span class="c1"># Get movie titles
+</span>    <span class="n">movies</span><span class="o">=</span><span class="p">{}</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="o">+</span><span class="s">'/u.item'</span><span class="p">):</span>
+        <span class="p">(</span><span class="nb">id</span><span class="p">,</span><span class="n">title</span><span class="p">)</span><span class="o">=</span><span class="n">line</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">'|'</span><span class="p">)[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="n">movies</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span><span class="o">=</span><span class="n">title</span>
+    <span class="c1"># Load data
+</span>    <span class="n">prefs</span><span class="o">=</span><span class="p">{}</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="o">+</span><span class="s">'/u.data'</span><span class="p">):</span>
+            <span class="p">(</span><span class="n">user</span><span class="p">,</span><span class="n">movieid</span><span class="p">,</span><span class="n">rating</span><span class="p">,</span><span class="n">ts</span><span class="p">)</span><span class="o">=</span><span class="n">line</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">'</span><span class="se">\t</span><span class="s">'</span><span class="p">)</span> <span class="n">prefs</span><span class="p">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">user</span><span class="p">,{})</span>
+            <span class="n">prefs</span><span class="p">[</span><span class="n">user</span><span class="p">][</span><span class="n">movies</span><span class="p">[</span><span class="n">movieid</span><span class="p">]]</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">rating</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">prefs</span>
+</code></pre></div></div>
+
+<p>loadMovieLens() will load movielens data and return dictionary. Now we have loaded datset in the same file we
+will be calculating similary between users.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span>
+<span class="c1"># Returns a distance-based similarity score for person1 and person2
+</span><span class="k">def</span> <span class="nf">sim_distance</span><span class="p">(</span><span class="n">prefs</span><span class="p">,</span><span class="n">person1</span><span class="p">,</span><span class="n">person2</span><span class="p">):</span>
+    <span class="c1"># Get the list of shared_items
+</span>    <span class="n">si</span><span class="o">=</span><span class="p">{}</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">prefs</span><span class="p">[</span><span class="n">person1</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">prefs</span><span class="p">[</span><span class="n">person2</span><span class="p">]:</span>
+            <span class="n">si</span><span class="p">[</span><span class="n">item</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span>
+    <span class="c1"># if they have no ratings in common, return 0
+</span>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">si</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="mi">0</span>
+    <span class="c1"># Add up the squares of all the differences
+</span>    <span class="n">sum_of_squares</span><span class="o">=</span><span class="nb">sum</span><span class="p">([</span><span class="nb">pow</span><span class="p">(</span><span class="n">prefs</span><span class="p">[</span><span class="n">person1</span><span class="p">][</span><span class="n">item</span><span class="p">]</span><span class="o">-</span><span class="n">prefs</span><span class="p">[</span><span class="n">person2</span><span class="p">][</span><span class="n">item</span><span class="p">],</span><span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">prefs</span><span class="p">[</span><span class="n">person1</span><span class="p">]</span> <span class="k">if</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">prefs</span><span class="p">[</span><span class="n">person2</span><span class="p">]])</span>
+    <span class="k">return</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">sum_of_squares</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>After calling sim_distance() it will calculate similarity score between users.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Returns the best matches for person from the prefs dictionary.
+</span><span class="k">def</span> <span class="nf">topMatches</span><span class="p">(</span><span class="n">prefs</span><span class="p">,</span><span class="n">person</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">similarity</span><span class="o">=</span><span class="n">sim_pearson</span><span class="p">):</span>
+<span class="n">scores</span><span class="o">=</span><span class="p">[(</span><span class="n">similarity</span><span class="p">(</span><span class="n">prefs</span><span class="p">,</span><span class="n">person</span><span class="p">,</span><span class="n">other</span><span class="p">),</span><span class="n">other</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">other</span> <span class="ow">in</span> <span class="n">prefs</span> <span class="k">if</span> <span class="n">other</span><span class="o">!=</span><span class="n">person</span><span class="p">]</span>
+<span class="c1"># Sort the list so the highest scores appear at the top
+</span><span class="n">scores</span><span class="p">.</span><span class="n">sort</span><span class="p">(</span> <span class="p">)</span>
+<span class="n">scores</span><span class="p">.</span><span class="n">reverse</span><span class="p">(</span> <span class="p">)</span>
+<span class="k">return</span> <span class="n">scores</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">n</span><span class="p">]</span>
+</code></pre></div></div>
+<p>After calculating similar distance socre topMatches() ranks them in descending order that way we get highest rated similar users at first.Now the last part is getting recommendations.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">getRecommendations</span><span class="p">(</span><span class="n">prefs</span><span class="p">,</span><span class="n">person</span><span class="p">,</span><span class="n">similarity</span><span class="o">=</span><span class="n">sim_pearson</span><span class="p">):</span>
+    <span class="n">totals</span><span class="o">=</span><span class="p">{}</span>
+    <span class="n">simSums</span><span class="o">=</span><span class="p">{}</span>
+    <span class="k">for</span> <span class="n">other</span> <span class="ow">in</span> <span class="n">prefs</span><span class="p">:</span>
+        <span class="c1"># don't compare me to myself
+</span>        <span class="k">if</span> <span class="n">other</span><span class="o">==</span><span class="n">person</span><span class="p">:</span> <span class="k">continue</span>
+        <span class="n">sim</span><span class="o">=</span><span class="n">similarity</span><span class="p">(</span><span class="n">prefs</span><span class="p">,</span><span class="n">person</span><span class="p">,</span><span class="n">other</span><span class="p">)</span>
+        <span class="c1"># ignore scores of zero or lower
+</span>        <span class="k">if</span> <span class="n">sim</span><span class="o">&lt;=</span><span class="mi">0</span><span class="p">:</span> <span class="k">continue</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">prefs</span><span class="p">[</span><span class="n">other</span><span class="p">]:</span>
+            <span class="c1"># only score movies I haven't seen yet
+</span>            <span class="k">if</span> <span class="n">item</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">prefs</span><span class="p">[</span><span class="n">person</span><span class="p">]</span> <span class="ow">or</span> <span class="n">prefs</span><span class="p">[</span><span class="n">person</span><span class="p">][</span><span class="n">item</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                <span class="c1"># Similarity * Score
+</span>                <span class="n">totals</span><span class="p">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">item</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+                <span class="n">totals</span><span class="p">[</span><span class="n">item</span><span class="p">]</span><span class="o">+=</span><span class="n">prefs</span><span class="p">[</span><span class="n">other</span><span class="p">][</span><span class="n">item</span><span class="p">]</span><span class="o">*</span><span class="n">sim</span>
+                <span class="c1"># Sum of similarities
+</span>                <span class="n">simSums</span><span class="p">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">item</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+                <span class="n">simSums</span><span class="p">[</span><span class="n">item</span><span class="p">]</span><span class="o">+=</span><span class="n">sim</span>
+        <span class="c1"># print(totals)
+</span>        <span class="c1"># print(simSums)
+</span>        <span class="c1"># Create the normalized list
+</span>        <span class="n">rankings</span><span class="o">=</span><span class="p">[(</span><span class="n">total</span><span class="o">/</span><span class="n">simSums</span><span class="p">[</span><span class="n">item</span><span class="p">],</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span><span class="p">,</span><span class="n">total</span> <span class="ow">in</span> <span class="n">totals</span><span class="p">.</span><span class="n">items</span><span class="p">()]</span>
+        <span class="c1"># Return the sorted list
+</span>        <span class="n">rankings</span><span class="p">.</span><span class="n">sort</span><span class="p">(</span> <span class="p">)</span>
+        <span class="n">rankings</span><span class="p">.</span><span class="n">reverse</span><span class="p">(</span> <span class="p">)</span>
+        <span class="k">return</span> <span class="n">rankings</span>
+</code></pre></div></div>
+<p>getRecommendations() will give you recommendation for particular user. We can get
+recommendation by first loading dataset and then calling recommendation in the same file below.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">prefs</span><span class="o">=</span><span class="n">loadMovieLens</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"Recommended movies are "</span><span class="p">,</span><span class="n">getRecommendations</span><span class="p">(</span><span class="n">prefs</span><span class="p">,</span><span class="s">'27'</span><span class="p">))</span> <span class="c1"># 27 is user id corresponds to user name like “Alice” or “Bob”
+</span></code></pre></div></div>
+<p>By calling above two function you will get recommations in the form of list.</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>python3 recommendation.py
+ <span class="o">[(</span>5.0,’Superman returns’<span class="o">)</span>,..]
+</code></pre></div></div>
+<p>with rating score and movie name. And that’s it we have create a recommendation system using
+Collaborative Filtering</p>
+<h1 id="conclusion">Conclusion</h1>
+
+<p>Collabarative filtering is useful when your dataset is small and keeps on changing. But it
+does have some disadvantages like its computation time is significantly slower when your
+dataset increases. So depending on the problem we can use this technique to recommend
+product to users</p>
+:ET

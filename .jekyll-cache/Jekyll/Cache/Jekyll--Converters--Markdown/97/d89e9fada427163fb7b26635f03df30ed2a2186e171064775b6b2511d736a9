@@ -1,0 +1,48 @@
+I"w	<h1 id="what-is-collaborative-filtering">What is Collaborative Filtering?</h1>
+
+<p>By the name “collab” it means we are combining. In this case we combine multiple user
+information and filter out the items that from the group of user that has similar tastes to the
+user. In general it’s a technique for filtering an item, which a user might like on the basis of
+combined actions by group of similar user</p>
+
+<h1 id="algorithmn-and-concepts">Algorithmn and Concepts</h1>
+
+<h2 id="euclidean-distance-score">Euclidean Distance Score</h2>
+
+<p>Let’s say a person who has identical taste with other people is 1 and 0 for those who has no
+similar taste with other people, so our similarity value ranges from 0 to 1. Since we are
+combining people to find similarity among them and recommend a product depending on
+how similar they are. In order to measure similarity, I will be using Euclidean Distance Score
+in this article. There are many other measures depending on the problem you can chose
+other distance score measures. For this article I will be using movie lens dataset where you
+can find movie,user,rating.</p>
+<ul>
+  <li>Step 1: Load the dataset</li>
+  <li>Step 2: Calculate the similarity score between each user. If ‘user1’ is the one we are trying to
+recommend to then calcuate the similairy between ‘user1’ and all other users.</li>
+</ul>
+<center>d=√((x2-x1)²+(y2-y1)²)</center>
+<p>similarity score (r) = 1/(1+d)</p>
+<ul>
+  <li>Step 3: for every other user multiple each similarity we calculate in step 2 with the product
+rating that user has not rated before. In this case we will be multiplying other product which
+‘user1’ has never rated before. It looks something like this in the figure below</li>
+</ul>
+
+<h1 id="pre-requisites">Pre-requisites</h1>
+
+<p>These are the following things you must do before getting started with implementation:</p>
+<ul>
+  <li>Make sure you have python installed in your system</li>
+  <li>You must have basic knowledge of python programming</li>
+</ul>
+
+<h1 id="implementation-of-the-algorithm">Implementation of the Algorithm</h1>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>Collabarative filtering is useful when your dataset is small and keeps on changing. But it
+does have some disadvantages like its computation time is significantly slower when your
+dataset increases. So depending on the problem we can use this technique to recommend
+product to users</p>
+:ET
