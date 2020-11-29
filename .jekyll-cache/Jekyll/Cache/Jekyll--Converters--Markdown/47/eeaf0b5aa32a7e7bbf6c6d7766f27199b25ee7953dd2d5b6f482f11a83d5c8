@@ -1,0 +1,28 @@
+I"�<h1 id="what-is-collaborative-filtering">What is Collaborative Filtering?</h1>
+
+<p>By the name “collab” it means we are combining. In this case we combine multiple user
+information and filter out the items that from the group of user that has similar tastes to the
+user. In general it’s a technique for filtering an item, which a user might like on the basis of
+combined actions by group of similar user</p>
+
+<h1 id="algorithmn-and-concepts">Algorithmn and Concepts</h1>
+
+<h2 id="euclidean-distance-score">Euclidean Distance Score</h2>
+
+<h1 id="pre-requisites">Pre-requisites</h1>
+
+<p>These are the following things you must do before getting started with implementation:</p>
+<ul>
+  <li>Make sure you have python installed in your system</li>
+  <li>You must have basic knowledge of python programming</li>
+</ul>
+
+<h1 id="implementation-of-the-algorithm">Implementation of the Algorithm</h1>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>Collabarative filtering is useful when your dataset is small and keeps on changing. But it
+does have some disadvantages like its computation time is significantly slower when your
+dataset increases. So depending on the problem we can use this technique to recommend
+product to users</p>
+:ET

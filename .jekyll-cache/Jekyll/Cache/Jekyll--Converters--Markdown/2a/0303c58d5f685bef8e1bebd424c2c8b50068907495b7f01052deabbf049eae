@@ -1,0 +1,15 @@
+I"f<h1 id="what-is-collaborative-filtering">What is Collaborative Filtering?</h1>
+
+<h1 id="algorithmn-and-concepts">Algorithmn and Concepts</h1>
+
+<h2 id="euclidean-distance-score">Euclidean Distance Score</h2>
+
+<h1 id="implementation-of-the-algorithm">Implementation of the Algorithm</h1>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>Collabarative filtering is useful when your dataset is small and keeps on changing. But it
+does have some disadvantages like its computation time is significantly slower when your
+dataset increases. So depending on the problem we can use this technique to recommend
+product to users</p>
+:ET

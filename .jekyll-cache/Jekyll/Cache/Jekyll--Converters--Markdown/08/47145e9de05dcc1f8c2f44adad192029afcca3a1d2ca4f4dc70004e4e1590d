@@ -1,0 +1,24 @@
+I"[<p>And of course Dillinger itself is open source with a [public repository][dill]
+ on GitHub.</p>
+
+<h3 id="installation">Installation</h3>
+
+<p>Dillinger requires <a href="https://nodejs.org/">Node.js</a> v4+ to run.</p>
+
+<p>Install the dependencies and devDependencies and start the server.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd </span>dillinger
+<span class="nv">$ </span>npm <span class="nb">install</span> <span class="nt">-d</span>
+<span class="nv">$ </span>node app
+</code></pre></div></div>
+
+<p>For production environments…</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>npm <span class="nb">install</span> <span class="nt">--production</span>
+<span class="nv">$ NODE_ENV</span><span class="o">=</span>production node app
+</code></pre></div></div>
+
+<h3 id="plugins">Plugins</h3>
+
+<p>Dillinger is currently extended with the following plugins. Instructions on how to use them in your own application are linked below.</p>
+:ET

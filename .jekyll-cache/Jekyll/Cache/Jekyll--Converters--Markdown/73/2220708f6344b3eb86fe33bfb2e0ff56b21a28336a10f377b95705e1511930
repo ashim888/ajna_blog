@@ -1,0 +1,13 @@
+I"<ul class="toc__menu">
+  <li><a href="#what-is-collaborative-filtering">What is Collaborative Filtering?</a></li>
+  <li><a href="#algorithmn-and-concepts">Algorithmn and Concepts</a>
+    <ul>
+      <li><a href="#euclidean-distance-score">Euclidean Distance Score</a></li>
+      <li><a href="#example">Example</a></li>
+    </ul>
+  </li>
+  <li><a href="#pre-requisites">Pre-requisites</a></li>
+  <li><a href="#implementation-of-the-algorithm">Implementation of the Algorithm</a></li>
+  <li><a href="#conclusion">Conclusion</a></li>
+</ul>
+:ET
