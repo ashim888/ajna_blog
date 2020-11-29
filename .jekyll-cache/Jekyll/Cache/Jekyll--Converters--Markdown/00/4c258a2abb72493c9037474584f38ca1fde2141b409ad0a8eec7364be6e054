@@ -1,4 +1,4 @@
-I"ÐL<p><strong>Easy Way to build Recommendation System using Collaborative
+I"ÚL<p><strong>Easy Way to build Recommendation System using Collaborative
 Filteringâ€”In Pythonâ€“Part-1</strong></p>
 
 <p>A Collaborative filtering is a one of the technique used while building recommendation
@@ -23,7 +23,7 @@ combined actions by group of similar user</p>
 <h2 id="euclidean-distance-score">Euclidean Distance Score</h2>
 
 <p>Euclidean Distance is a simple way to calculate similarity score, which takes items that users have rated in common and uses them as axes for a chart. As show in Figure 1.
-<img src="/assets/images/euclidean_score.JPG" alt="Eculidean Distance Score" /></p>
+<img src="/ajna_blog/assets/images/euclidean_score.JPG" alt="Eculidean Distance Score" /></p>
 <center><i><small>Figure 1. Users in preference space </small></i></center>
 <p>This figure shows the people charted in preference space. User1 has been plotted at
 4.5 on the Kung Fu Panda axis and at 1.0 on the Frozen axis. The closer two people are in
