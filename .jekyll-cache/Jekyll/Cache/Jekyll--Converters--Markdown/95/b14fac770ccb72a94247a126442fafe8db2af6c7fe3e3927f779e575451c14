@@ -1,4 +1,4 @@
-I"�L<p><strong>Easy Way to build Recommendation System using Collaborative
+I"@M<p><strong>Easy Way to build Recommendation System using Collaborative
 Filtering—In Python–Part-1</strong></p>
 
 <p>A Collaborative filtering is a one of the technique used while building recommendation
@@ -84,6 +84,7 @@ and that value is the predicted score.</p>
 <ul>
   <li>Make sure you have python installed in your system</li>
   <li>You must have basic knowledge of python programming</li>
+  <li>Make sure you have movie lens dataset downloaded you can find it on the internet</li>
 </ul>
 
 <h1 id="implementation-of-the-algorithm">Implementation of the Algorithm</h1>

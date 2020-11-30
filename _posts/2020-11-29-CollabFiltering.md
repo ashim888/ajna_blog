@@ -96,6 +96,7 @@ and that value is the predicted score.
 These are the following things you must do before getting started with implementation:
   - Make sure you have python installed in your system
   - You must have basic knowledge of python programming
+  - Make sure you have movie lens dataset downloaded you can find it on the internet
 
 # Implementation of the Algorithm
 

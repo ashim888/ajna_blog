@@ -1,0 +1,14 @@
+I"<ul class="toc__menu">
+  <li><a href="#what-is-content-based-filtering">What is Content-based Filtering?</a></li>
+  <li><a href="#content-based-filtering-concepts">Content-based Filtering Concepts</a>
+    <ul>
+      <li><a href="#pearson-correlation-score">Pearson Correlation Score</a></li>
+      <li><a href="#how-to-calculate-the-score-for-two-users-using-pearson-method">How to calculate the score for two users using pearson method?</a></li>
+    </ul>
+  </li>
+  <li><a href="#item-comparison">Item comparison</a></li>
+  <li><a href="#content-based-recommendations-theory">Content-based Recommendations Theory</a></li>
+  <li><a href="#content-based-recommendations-practical">Content-based Recommendations Practical</a></li>
+  <li><a href="#conclusion">Conclusion</a></li>
+</ul>
+:ET
