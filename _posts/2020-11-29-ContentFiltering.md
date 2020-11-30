@@ -7,7 +7,7 @@ toc_label: Table of Contents"
 header:
     overlay_image: /assets/images/codecode.jpg
 image1: /assets/images/contentbasedtable.JPG
-image2: /assets/images/tablepearson.JPG
+image2: /assets/images/tablepearsonnew.JPG
 image3: /assets/images/fig-1.JPG
 image4: /assets/images/fig-2.JPG
 ---
@@ -46,8 +46,9 @@ example of a much higher correlation, one of about 0.75.
 
 Let X be the user1's rated data and Y be the user2's rated data then it looks somthing like this
 
-![Table-1]({{page.image2 | relative_url }})
 *Table-1. Pearson Co-relation Score*
+![Table-1]({{page.image2 | relative_url }})
+
 
 Here r gives the similarity score
 
