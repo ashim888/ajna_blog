@@ -1,9 +1,11 @@
 ---
 layout: single
 author: sagar
-title: "Recommendation System"
+title: "Recommendation System - Part I"
 toc: true
 toc_label: Table of Contents"
+tags: ['recommendation system','python']
+categories: ['recommendation-system']
 header:
     overlay_image: /assets/images/codecode.jpg
 image1: /assets/images/euclidean_score.JPG
