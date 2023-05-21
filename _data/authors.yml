@@ -1,6 +1,6 @@
 ashim888:
   name        : "Ashim Lamichhane"
-  bio         : "What do you want, jewels? I am a very extravagant man."
+  bio         : "Everyone need a recess"
   avatar      : "/assets/images/image1.JPG"
   links:
     - label: "Email"
@@ -33,3 +33,16 @@ sagar:
     - label: "Facebook"
       icon: "fab fa-fw fa-facebook-square"
       url: "https://twitter.com/extravagantman"
+
+pratistha:
+  name        : "Pratistha Shrestha"
+  bio         : "Jr. Django Developer"
+  position    : "Intern"
+  avatar      : "/assets/images/hero.webp"
+  links:
+    - label: "Email"
+      icon: "fas fa-fw fa-envelope-square"
+      url: "mailto:pratisthashrestha03@gmail.com"
+    - label: "Facebook"
+      icon: "fab fa-fw fa-facebook-square"
+      url: "https://www.facebook.com/pratistha83"

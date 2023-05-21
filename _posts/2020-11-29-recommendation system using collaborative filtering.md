@@ -4,7 +4,7 @@ author: sagar
 title: "Recommendation System - Part I"
 toc: true
 toc_label: Table of Contents"
-tags: ['recommendation system','python']
+tags: ['recommendation system','python','Collabarative filtering']
 categories: ['recommendation-system']
 header:
     overlay_image: /assets/images/codecode.jpg
