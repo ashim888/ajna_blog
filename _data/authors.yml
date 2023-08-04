@@ -1,20 +1,20 @@
 ashim888:
   name        : "Ashim Lamichhane"
   bio         : "Everyone need a recess"
-  avatar      : "/assets/images/image1.JPG"
+  avatar      : "/assets/images/ashim.jpeg"
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
-      url: "mailto:billyrick@rick.com"
+      url: "mailto:ashim@ajnalab.com"
     - label: "Website"
       icon: "fas fa-fw fa-link"
-      url: "https://thewhip.com"
+      url: "https://ashimlamichhane.com.np/"
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/extravagantman"
-    - label: "Facebook"
-      icon: "fab fa-fw fa-facebook-square"
-      url: "https://twitter.com/extravagantman"
+      url: "https://twitter.com/ashim888"
+    - label: "Instagram"
+      icon: "fab fa-fw fa-instagram"
+      url: "https://instagram.com/ashim888"
 
 sagar:
   name        : "Sagar Sigdel"
