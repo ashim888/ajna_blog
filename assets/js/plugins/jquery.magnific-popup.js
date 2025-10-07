@@ -14,6 +14,23 @@
    }
    }(function($) {
 
+  /**
+   * Sanitize markup to avoid script injection vulnerabilities.
+   * This basic sanitizer removes <script> tags and event handler attributes. 
+   * For applications that require user content, a stricter sanitizer should be used.
+   * @param {string} markup
+   * @returns {string} sanitized markup
+   */
+  function sanitizeMarkup(markup) {
+    if (typeof markup !== 'string') return markup;
+    // Remove <script>...</script> tags (greedy)
+    markup = markup.replace(/<script[\s\S]*?>[\s\S]*?<\/script\s*>/gi, '');
+    // Remove event handler attributes, e.g. onclick, onerror
+    markup = markup.replace(/\son\w+\s*=\s*(['"]).*?\1/gi, '');
+    // Optionally, you may want to do more.
+    return markup;
+  }
+
   /*>>core*/
   /**
    *
@@ -506,7 +523,12 @@
         _mfpTrigger('FirstMarkupParse', markup);
 
         if(markup) {
-          mfp.currTemplate[type] = $(markup);
+          /**
+           * SECURITY: The value for `markup` may originate from plugin options.
+           * If untrusted data is passed here, it could lead to XSS.
+           * Therefore, user-supplied `markup` must be trusted or properly sanitized!
+           */
+          mfp.currTemplate[type] = $(sanitizeMarkup(markup));
         } else {
           // if there is no markup found we just define that template is parsed
           mfp.currTemplate[type] = true;
